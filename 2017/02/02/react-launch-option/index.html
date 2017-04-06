@@ -1,0 +1,668 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="react-native," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="react-native应用于实际项目，大都以模块形式嵌入到现有的应用中，往往需要在调起react-native的同时从native传递参数到js，而react-native目前的文档不是很全，在这方面也没有相关接口说明，只能靠自己来摸索了。 假设需求是需要将native端的activity label传递给js端并显示在title bar上，基于react-native v0.40的Androi">
+<meta name="keywords" content="react-native">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react-native android -- 启动参数传递">
+<meta property="og:url" content="http://yoursite.com/2017/02/02/react-launch-option/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="react-native应用于实际项目，大都以模块形式嵌入到现有的应用中，往往需要在调起react-native的同时从native传递参数到js，而react-native目前的文档不是很全，在这方面也没有相关接口说明，只能靠自己来摸索了。 假设需求是需要将native端的activity label传递给js端并显示在title bar上，基于react-native v0.40的Androi">
+<meta property="og:updated_time" content="2017-02-03T05:08:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react-native android -- 启动参数传递">
+<meta name="twitter:description" content="react-native应用于实际项目，大都以模块形式嵌入到现有的应用中，往往需要在调起react-native的同时从native传递参数到js，而react-native目前的文档不是很全，在这方面也没有相关接口说明，只能靠自己来摸索了。 假设需求是需要将native端的activity label传递给js端并显示在title bar上，基于react-native v0.40的Androi">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/02/react-launch-option/"/>
+
+
+
+
+
+  <title> react-native android -- 启动参数传递 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/02/react-launch-option/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="xzj">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                react-native android -- 启动参数传递
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-02T22:09:20+08:00">
+                2017-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>react-native应用于实际项目，大都以模块形式嵌入到现有的应用中，往往需要在调起react-native的同时从native传递参数到js，而react-native目前的文档不是很全，在这方面也没有相关接口说明，只能靠自己来摸索了。</p>
+<p>假设需求是需要将native端的activity label传递给js端并显示在title bar上，基于react-native v0.40的Android平台实现。</p>
+<a id="more"></a>
+<h2 id="方法1：通过封装原生模块实现"><a href="#方法1：通过封装原生模块实现" class="headerlink" title="方法1：通过封装原生模块实现"></a>方法1：通过封装原生模块实现</h2><p>最初想到可以通过react-native提供的原生模块方法，在java端封装出一个原生模块，并在js端注册回调函数，在回调函数的参数中返回期望传递的参数，js端调用原生模块的方法后在回调函数中就可以获得这些参数。</p>
+<p>定义一个原生模块，并调用回掉函数来传递label参数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseModule</span> <span class="keyword">extends</span> <span class="title">ReactContextBaseJavaModule</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseModule</span><span class="params">(ReactApplicationContext reactContext)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(reactContext);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"BaseModule"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@ReactMethod</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getActivityLable</span><span class="params">(Callback errorCallback, Callback successCallback)</span></span>&#123;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            Activity activity = getCurrentActivity();</div><div class="line">            PackageManager pm = activity.getPackageManager();</div><div class="line">            String label = pm.getActivityInfo(activity.getComponentName(), <span class="number">0</span>).loadLabel(pm).toString();</div><div class="line">            successCallback.invoke(label);</div><div class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</div><div class="line">            errorCallback.invoke(e.getMessage());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>自定义一个ReactPackage，将刚才定义的模块添加进去。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyReactPackage</span> <span class="keyword">implements</span>  <span class="title">ReactPackage</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;NativeModule&gt; <span class="title">createNativeModules</span><span class="params">(ReactApplicationContext reactContext)</span> </span>&#123;</div><div class="line">        List&lt;NativeModule&gt; modules = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        modules.add(<span class="keyword">new</span> BaseModule(reactContext));</div><div class="line">        <span class="keyword">return</span> modules;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> List&lt;Class&lt;? extends JavaScriptModule&gt;&gt; createJSModules() &#123;</div><div class="line">        <span class="keyword">return</span> Collections.emptyList();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;ViewManager&gt; <span class="title">createViewManagers</span><span class="params">(ReactApplicationContext reactContext)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> Collections.emptyList();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在项目的ReactApplication中添加MyReactPackage</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> ReactNativeHost mReactNativeHost = <span class="keyword">new</span> ReactNativeHost(<span class="keyword">this</span>) &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">getUseDeveloperSupport</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> BuildConfig.DEBUG;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> List&lt;ReactPackage&gt; <span class="title">getPackages</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> Arrays.&lt;ReactPackage&gt;asList(</div><div class="line">                    <span class="keyword">new</span> MainReactPackage(),</div><div class="line">                    <span class="keyword">new</span> MyReactPackage()</div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">    &#125;;</div></pre></td></tr></table></figure>
+<p>最后在js端调用这个原生模块</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">componentWillMount()&#123;</div><div class="line">  NativeModules.BaseModule.getActivityLable(</div><div class="line">    <span class="function"><span class="params">()</span>=&gt;</span><span class="built_in">console</span>.log(<span class="string">'error'</span>),</div><div class="line">    (lable)=&gt;<span class="keyword">this</span>.setState(&#123;<span class="attr">title</span>:lable&#125;));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>方法1虽然可以实现传递的目的，但是也存在问题，就是js端调用原生模块方法需要通过ReactBridge在js-native-java间进行，调用完毕再回调回js，期间需要花费一定的时间，而期间react-native的初始化是在同步进行中的，这就会引起一个时序上的问题：</p>
+<blockquote>
+<p>componentWillMount()：原生模块被调用，其他模块初始化</p>
+<p>render(): 其他模块初始化完毕，开始渲染界面（此时原生模块调用回调流程还未走完）</p>
+<p>render() again: 原生模块调用回调流程走完，触发UI二次渲染</p>
+</blockquote>
+<p>这样会导致UI界面在最初的时候没有显示title, 而后title在下一次渲染的时候显示，从而出现一次闪烁，体验不是很好，所以有没有从react-native初始化的开始就可以传递参数的方法？</p>
+<h2 id="方法2：重载ReactActivityDelegate-getLaunchOptions"><a href="#方法2：重载ReactActivityDelegate-getLaunchOptions" class="headerlink" title="方法2：重载ReactActivityDelegate.getLaunchOptions()"></a>方法2：重载ReactActivityDelegate.getLaunchOptions()</h2><p>查看了react-native的源码，终于发现了在ReactActivityDelegate中会调用ReactRootView.startReactApplication方法，其中的一个参数Bundle launchOptions，无论从参数名还是参数类型上都很有可能就是我们要找的那个参数，通过追踪代码，终于发现XReactInstanceManagerImpl.attachMeasuredRootViewToInstance中会拿到整个参数并传递给react-bridge，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">attachMeasuredRootViewToInstance</span><span class="params">(</span></span></div><div class="line">      ReactRootView rootView,</div><div class="line">      CatalystInstance catalystInstance) &#123;</div><div class="line">    Systrace.beginSection(TRACE_TAG_REACT_JAVA_BRIDGE, <span class="string">"attachMeasuredRootViewToInstance"</span>);</div><div class="line">    UiThreadUtil.assertOnUiThread();</div><div class="line"></div><div class="line">    <span class="comment">// Reset view content as it's going to be populated by the application content from JS</span></div><div class="line">    rootView.removeAllViews();</div><div class="line">    rootView.setId(View.NO_ID);</div><div class="line"></div><div class="line">    UIManagerModule uiManagerModule = catalystInstance.getNativeModule(UIManagerModule.class);</div><div class="line">    <span class="keyword">int</span> rootTag = uiManagerModule.addMeasuredRootView(rootView);</div><div class="line">    rootView.setRootViewTag(rootTag);</div><div class="line">    <span class="meta">@Nullable</span> Bundle launchOptions = rootView.getLaunchOptions();\\获取到了参数</div><div class="line">    WritableMap initialProps = Arguments.makeNativeMap(launchOptions); </div><div class="line">    String jsAppModuleName = rootView.getJSModuleName();</div><div class="line"></div><div class="line">    WritableNativeMap appParams = <span class="keyword">new</span> WritableNativeMap();</div><div class="line">    appParams.putDouble(<span class="string">"rootTag"</span>, rootTag);</div><div class="line">    appParams.putMap(<span class="string">"initialProps"</span>, initialProps);\\作为initialProps，最终传递给reactBridge</div><div class="line">    catalystInstance.getJSModule(AppRegistry.class).runApplication(jsAppModuleName, appParams);</div><div class="line">    rootView.onAttachedToReactInstance();</div><div class="line">    Systrace.endSection(TRACE_TAG_REACT_JAVA_BRIDGE);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>所以只要在将需要传递的参数赋予launchOptions，在js端应该就可以在index.android.js的应用入口以props的形式拿到这些参数。</p>
+<p>接下来就比较简单了，在java端继承ReactActivity的react-native入口类里，重载createReactActivityDelegate()以及getLaunchOptions()这两个方法就可以了。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyReactActivity</span> <span class="keyword">extends</span> <span class="title">ReactActivity</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> String <span class="title">getMainComponentName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"cga"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> ReactActivityDelegate <span class="title">createReactActivityDelegate</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ReactActivityDelegate(<span class="keyword">this</span>, getMainComponentName())&#123;</div><div class="line">            <span class="meta">@Nullable</span></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">protected</span> Bundle <span class="title">getLaunchOptions</span><span class="params">()</span> </span>&#123;</div><div class="line">                Bundle initialProps = <span class="keyword">new</span> Bundle();</div><div class="line">                initialProps.putString(<span class="string">"title"</span>, <span class="string">"xxx"</span>);</div><div class="line">                <span class="keyword">return</span> initialProps;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而在js端，和之前猜测的一样，在index.android.js中可以获取到传递过来的props：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">example</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        &lt;MyNavigator initialComponent=&#123;IndexView&#125; title=&#123;this.props.title&#125;/&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">AppRegistry.registerComponent('example', () =&gt; example);</div></pre></td></tr></table></figure>
+<p>这样就不会存在像第一种方法那样的时序问题，react-native界面第一次渲染的时候title值以及传递到了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/react-native/" rel="tag"># react-native</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/20/codePush/" rel="next" title="codePush">
+                <i class="fa fa-chevron-left"></i> codePush
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/02/npm-yarn-common-command/" rel="prev" title="npm&yarn常用命令">
+                npm&yarn常用命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="xzj" />
+          <p class="site-author-name" itemprop="name">xzj</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法1：通过封装原生模块实现"><span class="nav-number">1.</span> <span class="nav-text">方法1：通过封装原生模块实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法2：重载ReactActivityDelegate-getLaunchOptions"><span class="nav-number">2.</span> <span class="nav-text">方法2：重载ReactActivityDelegate.getLaunchOptions()</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xzj</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

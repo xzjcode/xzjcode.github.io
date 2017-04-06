@@ -1,0 +1,680 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Install the CodePush CLI1npm install -g code-push-cli Create a CodePush account1code-push register Register your app with the service1code-push app add &amp;lt;appName&amp;gt; CodePush-ify your mobile client">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="codePush">
+<meta property="og:url" content="http://yoursite.com/2017/02/20/codePush/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Install the CodePush CLI1npm install -g code-push-cli Create a CodePush account1code-push register Register your app with the service1code-push app add &amp;lt;appName&amp;gt; CodePush-ify your mobile client">
+<meta property="og:image" content="e:/nodeProjects/githubPage/MyPages/source/_posts/2017-02-20-codePush/codepush.GIF">
+<meta property="og:updated_time" content="2017-02-20T08:05:30.553Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="codePush">
+<meta name="twitter:description" content="Install the CodePush CLI1npm install -g code-push-cli Create a CodePush account1code-push register Register your app with the service1code-push app add &amp;lt;appName&amp;gt; CodePush-ify your mobile client">
+<meta name="twitter:image" content="e:/nodeProjects/githubPage/MyPages/source/_posts/2017-02-20-codePush/codepush.GIF">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/20/codePush/"/>
+
+
+
+
+
+  <title> codePush | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/20/codePush/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="xzj">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                codePush
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-20T14:11:45+08:00">
+                2017-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Install-the-CodePush-CLI"><a href="#Install-the-CodePush-CLI" class="headerlink" title="Install the CodePush CLI"></a>Install the CodePush CLI</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g code-push-cli</div></pre></td></tr></table></figure>
+<h2 id="Create-a-CodePush-account"><a href="#Create-a-CodePush-account" class="headerlink" title="Create a CodePush account"></a>Create a CodePush account</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code-push register</div></pre></td></tr></table></figure>
+<h2 id="Register-your-app-with-the-service"><a href="#Register-your-app-with-the-service" class="headerlink" title="Register your app with the service"></a>Register your app with the service</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code-push app add &lt;appName&gt;</div></pre></td></tr></table></figure>
+<h2 id="CodePush-ify-your-mobile-client"><a href="#CodePush-ify-your-mobile-client" class="headerlink" title="CodePush-ify your mobile client"></a>CodePush-ify your mobile client</h2><ul>
+<li><p>install react-native-code-push module</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install --save react-native-code-push@latest</div><div class="line">react-native link react-native-code-push</div></pre></td></tr></table></figure>
+</li>
+<li><p>get key of your app</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code-push deployment ls &lt;APP_NAME&gt; -k</div></pre></td></tr></table></figure>
+<p><img src="E:\nodeProjects\githubPage\MyPages\source\_posts\2017-02-20-codePush\codepush.GIF" alt="codepush"></p>
+<h4 id="Java-side"><a href="#Java-side" class="headerlink" title="Java side"></a>Java side</h4></li>
+<li><p>set key in native project</p>
+<p>Open your app’s <code>build.gradle</code> file</p>
+<p>set key in <code>{buildTypes{}}</code> section</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    ...</div><div class="line">    buildTypes &#123;</div><div class="line">        debug &#123;</div><div class="line">            ...</div><div class="line">            <span class="comment">// CodePush updates should not be tested in Debug mode</span></div><div class="line">            ...</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        releaseStaging &#123;</div><div class="line">            ...</div><div class="line">            buildConfigField <span class="string">"String"</span>, <span class="string">"CODEPUSH_KEY"</span>, <span class="string">'"&lt;INSERT_STAGING_KEY&gt;"'</span></div><div class="line">            ...</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        release &#123;</div><div class="line">            ...</div><div class="line">            buildConfigField <span class="string">"String"</span>, <span class="string">"CODEPUSH_KEY"</span>, <span class="string">'"&lt;INSERT_PRODUCTION_KEY&gt;"'</span></div><div class="line">            ...</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Open up your <code>MainApplication.java</code> file and make the following changes:</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> List&lt;ReactPackage&gt; <span class="title">getPackages</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="keyword">return</span> Arrays.&lt;ReactPackage&gt;asList(</div><div class="line">...</div><div class="line"><span class="keyword">new</span> CodePush(BuildConfig.CODEPUSH_KEY, MainApplication.<span class="keyword">this</span>, BuildConfig.DEBUG), </div><div class="line"><span class="comment">// Add/change this line.</span></div><div class="line">...</div><div class="line">);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="JavaScript-side"><a href="#JavaScript-side" class="headerlink" title="JavaScript side"></a>JavaScript side</h4><ul>
+<li><p>codePush</p>
+<p>Silent sync on app start</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Fully silent update which keeps the app in</span></div><div class="line"><span class="comment">// sync with the server, without ever</span></div><div class="line"><span class="comment">// interrupting the end user</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;&#125;</div><div class="line">MyApp = codePush(MyApp);</div></pre></td></tr></table></figure>
+<p>Silent sync everytime the app resumes</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Sync for updates everytime the app resumes.</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;&#125;</div><div class="line">MyApp = codePush(&#123; <span class="attr">checkFrequency</span>: codePush.CheckFrequency.ON_APP_RESUME, <span class="attr">installMode</span>: codePush.InstallMode.ON_NEXT_RESUME &#125;)(MyApp);</div></pre></td></tr></table></figure>
+<p>Interactive</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Active update, which lets the end user know</span></div><div class="line"><span class="comment">// about each update, and displays it to them</span></div><div class="line"><span class="comment">// immediately after downloading it</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;&#125;</div><div class="line">MyApp = codePush(&#123; <span class="attr">updateDialog</span>: <span class="literal">true</span>, <span class="attr">installMode</span>: codePush.InstallMode.IMMEDIATE &#125;)(MyApp);</div></pre></td></tr></table></figure>
+<p>Log/display progress</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Make use of the event hooks to keep track of</span></div><div class="line"><span class="comment">// the different stages of the sync process.</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    codePushStatusDidChange(status) &#123;</div><div class="line">        <span class="keyword">switch</span>(status) &#123;</div><div class="line">            <span class="keyword">case</span> codePush.SyncStatus.CHECKING_FOR_UPDATE:</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">"Checking for updates."</span>);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> codePush.SyncStatus.DOWNLOADING_PACKAGE:</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">"Downloading package."</span>);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> codePush.SyncStatus.INSTALLING_UPDATE:</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">"Installing update."</span>);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> codePush.SyncStatus.UP_TO_DATE:</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">"Up-to-date."</span>);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> codePush.SyncStatus.UPDATE_INSTALLED:</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">"Update installed."</span>);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    codePushDownloadDidProgress(progress) &#123;</div><div class="line">        <span class="built_in">console</span>.log(progress.receivedBytes + <span class="string">" of "</span> + progress.totalBytes + <span class="string">" received."</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">MyApp = codePush(MyApp);</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>checkFrequency</strong> </li>
+<li><strong>deploymentKey</strong> </li>
+<li><strong>installMode</strong> </li>
+<li><strong>mandatoryInstallMode</strong> </li>
+<li><strong>minimumBackgroundDuration</strong> </li>
+<li><strong>updateDialog</strong></li>
+</ul>
+</li>
+<li><p>codePush.checkForUpdate</p>
+</li>
+<li><p>​</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/08/react-native-cookies/" rel="next" title="react-native-cookies">
+                <i class="fa fa-chevron-left"></i> react-native-cookies
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/02/react-launch-option/" rel="prev" title="react-native android -- 启动参数传递">
+                react-native android -- 启动参数传递 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="xzj" />
+          <p class="site-author-name" itemprop="name">xzj</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-the-CodePush-CLI"><span class="nav-number">1.</span> <span class="nav-text">Install the CodePush CLI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-a-CodePush-account"><span class="nav-number">2.</span> <span class="nav-text">Create a CodePush account</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Register-your-app-with-the-service"><span class="nav-number">3.</span> <span class="nav-text">Register your app with the service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CodePush-ify-your-mobile-client"><span class="nav-number">4.</span> <span class="nav-text">CodePush-ify your mobile client</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-side"><span class="nav-number">4.0.1.</span> <span class="nav-text">Java side</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript-side"><span class="nav-number">4.0.2.</span> <span class="nav-text">JavaScript side</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xzj</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
